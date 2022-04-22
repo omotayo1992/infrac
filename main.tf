@@ -1,22 +1,22 @@
 provider "aws" {
-  region     = "us-east-1"
+  region  = "us-east-1"
   profile = "terraform-class"
 }
 
 
 resource "aws_instance" "class1" {
-  ami           = var.ami_id
+  ami = var.ami_id
   # count         = var.instance_count 
 
   for_each = {
-    prod = "t3.small"
-    test = "t2.nano"
-    preprod = "t3.medium"
-    sandbox = "c3.large"
-    qa = "t2.micro"
+    prod        = "t3.small"
+    test        = "t2.nano"
+    preprod     = "t3.medium"
+    sandbox     = "t2.large"
+    qa          = "t2.micro"
     Development = "t3.medium"
-  }   
-  
+  }
+
   instance_type = each.value
   key_name      = "A4L"
 
