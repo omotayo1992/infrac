@@ -1,7 +1,6 @@
 provider "aws" {
   region     = "us-east-1"
-  access_key = "AKIAUCP3T4TSSR532BHI"
-  secret_key = "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"
+  profile = "terraform-class"
 }
 
 
@@ -13,7 +12,7 @@ resource "aws_instance" "class1" {
     prod = "t3.small"
     test = "t2.nano"
     preprod = "t3.medium"
-    sandbox = "t2.large"
+    sandbox = "c3.large"
     qa = "t2.micro"
     Development = "t3.medium"
   }   
