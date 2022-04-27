@@ -6,7 +6,6 @@ provider "aws" {
 
 resource "aws_instance" "class1" {
   ami = var.ami_id
-  # count         = var.instance_count 
 
   for_each = {
     prod        = "t3.small"
@@ -29,15 +28,3 @@ resource "aws_instance" "class1" {
 variable "ami_id" {
   default = "ami-03ededff12e34e59e"
 }
-
-# variable "instance_count" {
-#   default = 5
-# }
-
-# variable "instance_type" {
-#   default = each.value
-# }
-
-# variable "name" {
-#   default = each.key
-# }
