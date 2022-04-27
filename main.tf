@@ -1,3 +1,16 @@
+
+terraform {
+  backend "s3" {
+    bucket = "statebubket-1"
+    key    = "mystate1"
+    region = "us-east-1"
+    profile = "terraform-class"
+  }
+}
+
+
+
+
 provider "aws" {
   region  = "us-east-1"
   profile = "terraform-class"
@@ -13,7 +26,7 @@ resource "aws_instance" "class1" {
     preprod     = "t3.medium"
     sandbox     = "t2.large"
     qa          = "t2.micro"
-    Development = "t3.medium"
+    Development = "t2.micro"
   }
 
   instance_type = each.value
