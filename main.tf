@@ -5,6 +5,7 @@ terraform {
     key     = "mystate1"
     region  = "us-east-1"
     profile = "terraform-class"
+    dynamodb_table = "statelock"
   }
 }
 
