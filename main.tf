@@ -1,20 +1,32 @@
 
-terraform {
-  backend "s3" {
-    bucket  = "statebubket-1"
-    key     = "mystate1"
-    region  = "us-east-1"
-    profile = "terraform-class"
-    dynamodb_table = "statelock"
-  }
-}
-
-
-
+# terraform {
+#   backend "s3" {
+#     bucket  = "statebubket-1"
+#     key     = "mystate1"
+#     region  = "us-east-1"
+#     profile = "terraform-class"
+#     dynamodb_table = "statelock"
+#   }
+# }
 
 provider "aws" {
-  region  = "us-east-1"
-  profile = "terraform-class"
+  access_key = var.access_key
+  secret_key = var.secret_key
+  region = var.region
+}
+
+variable "access_key" {}
+variable "secret_key" {}
+variable "region" {}
+
+terraform {
+  cloud {
+    organization = "Visual-greatness-llc"
+
+    workspaces {
+      name = "infrac"
+    }
+  }
 }
 
 
@@ -30,6 +42,7 @@ resource "aws_instance" "class1" {
     Development    = "t2.micro"
     toluinstance   = "t2.nano"
     loladeinstance = "t3.medium"
+    terraformcloud = "t3_medium"
   }
 
   instance_type = each.value
