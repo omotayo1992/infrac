@@ -42,7 +42,7 @@ resource "aws_instance" "class1" {
     Development    = "t2.micro"
     toluinstance   = "t2.nano"
     loladeinstance = "t3.medium"
-    terraformcloud = "t3_medium"
+    terraformcloud = "t3.medium"
   }
 
   instance_type = each.value
