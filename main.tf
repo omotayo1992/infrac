@@ -12,7 +12,7 @@
 provider "aws" {
   access_key = var.access_key
   secret_key = var.secret_key
-  region = var.region
+  region     = var.region
 }
 
 variable "access_key" {}
@@ -43,6 +43,7 @@ resource "aws_instance" "class1" {
     toluinstance   = "t2.nano"
     loladeinstance = "t3.medium"
     terraformcloud = "t3.medium"
+    Abimbola       = "t2.large"
   }
 
   instance_type = each.value
