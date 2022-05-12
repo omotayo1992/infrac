@@ -1,14 +1,3 @@
-
-# terraform {
-#   backend "s3" {
-#     bucket  = "statebubket-1"
-#     key     = "mystate1"
-#     region  = "us-east-1"
-#     profile = "terraform-class"
-#     dynamodb_table = "statelock"
-#   }
-# }
-
 provider "aws" {
   access_key = var.access_key
   secret_key = var.secret_key
@@ -31,30 +20,42 @@ terraform {
 
 
 resource "aws_instance" "class1" {
-  ami = var.ami_id
-
-  for_each = {
-    prod           = "t3.small"
-    test           = "t2.nano"
-    preprod        = "t3.medium"
-    sandbox        = "t2.large"
-    qa             = "t2.micro"
-    Development    = "t2.micro"
-    toluinstance   = "t2.nano"
-    loladeinstance = "t3.medium"
-    terraformcloud = "t3.medium"
-    Abimbola       = "t2.large"
-  }
-
-  instance_type = each.value
-  key_name      = "A4L"
+  ami             = "ami-0022f774911c1d690"
+  instance_type   = "t2.micro"
+  key_name        = "A4L"
+  security_groups = [aws_security_group.allow_access.id]
 
   tags = {
-    Name = each.key
+    Name = "Jenkins-server"
   }
 }
 
+resource "aws_security_group" "allow_access" {
+  name        = "allow_access"
+  description = "Allow access inbound traffic"
+  vpc_id      = "vpc-3a069347"
 
-variable "ami_id" {
-  default = "ami-03ededff12e34e59e"
+  ingress {
+    description = "ssh from public"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    description = "http from public"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
 }
