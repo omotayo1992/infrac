@@ -19,7 +19,7 @@ terraform {
 }
 
 
-resource "aws_instance" "class1" {
+resource "aws_instance" "jenkins" {
   ami             = "ami-0022f774911c1d690"
   instance_type   = "t2.micro"
   key_name        = "A4L"
