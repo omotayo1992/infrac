@@ -23,7 +23,7 @@ resource "aws_instance" "jenkins" {
   ami             = "ami-0022f774911c1d690"
   instance_type   = "t2.micro"
   key_name        = "A4L"
-  security_groups = [aws_security_group.allow_access.id]
+  vpc_security_groups_ids = [aws_security_group.allow_access.id]
 
   tags = {
     Name = "Jenkins-server"
@@ -55,7 +55,6 @@ resource "aws_security_group" "allow_access" {
     to_port          = 0
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
   }
 
 }
