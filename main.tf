@@ -76,3 +76,14 @@ resource "aws_instance" "tomcat" {
     Name = "Tomcat-server"
   }
 }
+
+resource "aws_instance" "test" {
+  ami                    = "ami-0022f774911c1d690"
+  instance_type          = "t2.micro"
+  key_name               = "A4L"
+  vpc_security_group_ids = [aws_security_group.allow_access.id]
+
+  tags = {
+    Name = "Orakuwe instance"
+  }
+}
